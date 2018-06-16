@@ -49,9 +49,32 @@ namespace TechJobsConsole
             {
                 string aValue = row[column];
 
-                if (aValue.Contains(value))
+                if (aValue.ToUpper().Contains(value.ToUpper()))
                 {
                     jobs.Add(row);
+                }
+            }
+
+            return jobs;
+        }
+
+        public static List<Dictionary<string, string>> FindByValue(string value)
+        {
+            LoadData();
+
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+
+            foreach (Dictionary<string, string> job in AllJobs)
+            {
+                foreach (string key in job.Keys)
+                {
+                    string aValue = job[key];
+
+                    if (aValue.ToUpper().Contains(value.ToUpper()))
+                    {
+                        jobs.Add(job);
+                        break;
+                    }
                 }
             }
 
@@ -71,7 +94,7 @@ namespace TechJobsConsole
 
             List<string[]> rows = new List<string[]>();
 
-            using (StreamReader reader = File.OpenText("job_data.csv"))
+            using (StreamReader reader = File.OpenText("C:\\Users\\Julian\\lc101\\TechJobsConsole\\src\\TechJobsConsole\\job_data.csv"))
             {
                 while (reader.Peek() >= 0)
                 {

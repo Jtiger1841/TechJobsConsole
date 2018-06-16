@@ -38,7 +38,7 @@ namespace TechJobsConsole
                     {
                         PrintJobs(JobData.FindAll());
                     }
-                    else
+                    else 
                     {
                         List<string> results = JobData.FindAll(columnChoice);
 
@@ -63,7 +63,7 @@ namespace TechJobsConsole
                     // Fetch results
                     if (columnChoice.Equals("all"))
                     {
-                        Console.WriteLine("Search all fields not yet implemented.");
+                        PrintJobs(JobData.FindByValue(searchTerm));
                     }
                     else
                     {
@@ -118,7 +118,22 @@ namespace TechJobsConsole
 
         private static void PrintJobs(List<Dictionary<string, string>> someJobs)
         {
-            Console.WriteLine("printJobs is not implemented yet");
+            if (someJobs.Count == 0)
+            {
+                Console.WriteLine("Error! No Valid Jobs");
+            } 
+            else
+            {
+                foreach (Dictionary<string, string> job in someJobs)
+                {
+                    Console.WriteLine("******");
+                    foreach (KeyValuePair<string, string> row in job)
+                    {
+                        Console.WriteLine("{0}:{1}", row.Key, row.Value);
+                    }
+                    Console.WriteLine("******");
+                }
+            }  
         }
     }
 }
